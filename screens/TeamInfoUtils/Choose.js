@@ -72,14 +72,13 @@ export default class Choose extends React.Component {
 const styles = StyleSheet.create({
 	header:{
 		width: Dimensions.get('window').width,
-		marginTop: -83,
-		height: 80
+		height: 80,
+		marginTop:-5,
 	},
 	container: {
-		flex: 1,
 		backgroundColor: "#efefef",
 		alignItems: "center",
-		justifyContent: "center",
+		height: Dimensions.get('window').height
 	},
 	input: {
 		backgroundColor: "#efefef",
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
 		margin: 10,
 		marginTop: 70,
 		marginBottom: 90,
-		width: 330
+		width: 330,
 	},
 	shadow: {
 		shadowOffset: { width: 3, height: 3 },

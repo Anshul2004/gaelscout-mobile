@@ -60,15 +60,14 @@ export default class Home extends React.Component {
 const styles = StyleSheet.create({
 	header:{
 		width: Dimensions.get('window').width,
-		marginTop: -80,
+		marginTop:-20,
 		height: 80
 	},
 	container: {
-		flex: 1,
 		padding: 15,
 		backgroundColor: "#efefef",
 		alignItems: "center",
-		justifyContent: "center"
+		height: Dimensions.get('window').height
 	},
 	title: {
 		color: "#e8e8e8",
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		width: 335,
 		height: 500,
-		marginTop: 15
+		marginTop: 30
 	},
 	shadow: {
 		shadowOffset: { width: 3, height: 3 },

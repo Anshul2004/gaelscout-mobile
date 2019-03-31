@@ -94,14 +94,13 @@ export default class Choose extends React.Component {
 const styles = StyleSheet.create({
 	header:{
 		width: Dimensions.get('window').width,
-		marginTop: -80,
-		height: 80
+		height: 80,
+		marginTop:-5,
 	},
 	container: {
-		flex: 1,
 		backgroundColor: "#efefef",
 		alignItems: "center",
-		justifyContent: "center",
+		height:Dimensions.get('window').height
 	},
 	input: {
 		backgroundColor: "#efefef",

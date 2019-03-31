@@ -89,15 +89,14 @@ export default class Choose extends React.Component {
 const styles = StyleSheet.create({
 	header:{
 		width: Dimensions.get('window').width,
-		marginTop: -115,
+		marginTop: -20,
 		height: 80
 	},
 	container: {
-		flex: 1,
 		padding: 15,
 		backgroundColor: "#efefef",
 		alignItems: "center",
-		justifyContent: "center"
+		height: Dimensions.get('window').height
 	},
 	blueView: {
 		...Platform.select({
@@ -112,7 +111,7 @@ const styles = StyleSheet.create({
 				borderLeftColor: 'transparent',
 				marginLeft: -20,
 				padding: 40,
-				marginTop: -20,
+				marginTop:30,
 				borderRadius: 20
 			},
 			android: {
