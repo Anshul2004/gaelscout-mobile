@@ -57,24 +57,6 @@ export default class Display extends React.Component {
 					gridMin={-5}
 					chartConfig={chartConfig}
 				/>
-
-				<Text style={styles.subtitle}>Rank in the last five tournaments</Text>
-				<LineChart
-					data={{
-					labels: sku,
-					datasets: [{
-						data: rank
-					}]
-					}}
-					width={340} // from react-native
-					height={320}
-					chartConfig={chartConfig}
-					bezier
-					style={{
-					marginVertical: 8,
-					borderRadius: 16
-					}}
-				/>
 			</ScrollView>
 		);
 	}

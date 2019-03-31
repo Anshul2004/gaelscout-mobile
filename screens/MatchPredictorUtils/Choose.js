@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, TextInput, View, Text, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 const axios = require("axios");
 
 export default class Choose extends React.Component {
@@ -37,7 +37,7 @@ export default class Choose extends React.Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
+			<KeyboardAvoidingView style={styles.container} behavior="padding" enabled keyboardVerticalOffset={30}>
 				{/*Blue Alliance*/}
 				<View style={styles.blueView}></View>
 				<View style={styles.shiftBlue}>
@@ -72,7 +72,7 @@ export default class Choose extends React.Component {
 				<TouchableOpacity onPress={this.computeOutput} style={styles.button}>
 					<Text style={styles.buttonText}>Predict</Text>
 				</TouchableOpacity>
-			</View>
+			</KeyboardAvoidingView>
         )
 	}
 }
@@ -145,13 +145,17 @@ const styles = StyleSheet.create({
 		marginLeft: 150
 	},
 	button: {
-		borderColor: "#efefef",
+		borderColor: "#474747",
 		borderWidth: 2,
 		padding: 10,
 		borderRadius: 10,
-		width: 117
+		width: 117,
+		marginTop: 60,
+		marginBottom: -40
 	},
 	buttonText: {
-		color: "#efefef"
+		color: "#474747",
+		textAlign: "center",
+		fontSize: 20
 	}
 });
