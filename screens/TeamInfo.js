@@ -1,6 +1,6 @@
 import {createStackNavigator} from 'react-navigation';
-import Choose from './MatchPredictorUtils/Choose';
-import Display from './MatchPredictorUtils/Display';
+import Choose from './TeamInfoUtils/Choose';
+import Display from './TeamInfoUtils/Display';
 
 export default createStackNavigator({
 	Choose: { screen: Choose,

@@ -14,36 +14,18 @@ export default class Choose extends React.Component {
 	computeOutput = async DATASET => 
 	{
 		let dat_a = await axios(
-			`https://api.vexdb.io/v1/get_rankings?season=Turning%20Point&team=${this.state.input}`
+			`https://api.vexdb.io/v1/get_teams?team=${this.state.input}`
 		);
-		var ccwm = [];
-		var tournaments = [];
-		var max_score = [];
-		var rank = [];
-		let name = this.state.input;
 
-		var lowestRank = 0;
+		let teamName = dat_a.data.result[0]["team_name"];
+		let organization = dat_a.data.result[0]["organisation"];
+		let region = dat_a.data.result[0]["region"];
+		let country = dat_a.data.result[0]["country"];
+		let city = dat_a.data.result[0]["city"];
+		let level = dat_a.data.result[0]["grade"];
+		let name = dat_a.data.result[0]["number"];
 
-		for(i = 0; i < dat_a.data.result.length; i++){
-			if(i == 5){
-				break;
-			}
-			if(dat_a.data.result[i]["rank"] > lowestRank){
-				lowestRank = dat_a.data.result[4-i]["rank"];
-			}
-			ccwm.push(dat_a.data.result[4-i]["ccwm"]);
-			tournaments.push("VRC-"+(5-i));
-			max_score.push(dat_a.data.result[4-i]["max_score"]);
-		}
-
-		for(i = 0; i < dat_a.data.result.length; i++){
-			if(i == 5){
-				break;
-			}
-			rank.push(lowestRank-dat_a.data.result[4-i]["rank"]);
-		}
-
-		this.props.navigation.navigate('Display', {ccwm: ccwm, sku: tournaments, max_score: max_score, rank: rank, name:name});
+		this.props.navigation.navigate('Display', {name:name,teamName:teamName, organization:organization, region:region, country:country, city:city, level:level});
 	}
 
 
@@ -59,7 +41,7 @@ export default class Choose extends React.Component {
 				<View style={styles.shadow}>
 					<LinearGradient
 						style={styles.cardStats}
-						colors={["#42b3f4", "#1cabff"]}
+						colors={["#DE6E4B", "#d87a5d"]}
 					>
 						<View style={styles.contentWrapper}>
 							<Image
@@ -69,20 +51,16 @@ export default class Choose extends React.Component {
 									height: 48
 								}}
 							/>
-							<Text style={styles.title}>GaelScout Statistics</Text>
+							<Text style={styles.title}>Team Information</Text>
 						</View>
-						<View style={styles.contentWrapperBody}>
-							<TextInput
+						<TextInput
 							style={styles.input}
 							placeholder="Team Name"
 							onChangeText={(text) => this.setState({input: text})}
-							/>
-							<Text style={styles.cardStatsBodyTextRight}>• Search for any team in the world.</Text>
-						</View>
-						<Text style={styles.cardStatsBodyText}>• Quickly and efficiently get team stats for thorough analysis.</Text>
-						<Text style={styles.cardStatsBodyText}>• Beautiful graphs provide an appealing visualization to your eyes.</Text>
+						/>
+						<Text style={styles.cardStatsBodyText}>Get background information on any team in the world almost instantaneously with the information finder.</Text>
 						<TouchableOpacity onPress={this.computeOutput} style={styles.button}>
-							<Text style={styles.buttonText}>Find Statistics</Text>
+							<Text style={styles.buttonText}>Find Information</Text>
 						</TouchableOpacity>
 					</LinearGradient>
 				</View>
@@ -94,7 +72,7 @@ export default class Choose extends React.Component {
 const styles = StyleSheet.create({
 	header:{
 		width: Dimensions.get('window').width,
-		marginTop: -80,
+		marginTop: -83,
 		height: 80
 	},
 	container: {
@@ -111,7 +89,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		color: "#4c4c4c",
 		width: 130,
-		marginTop: 30
+		marginTop: 65
 	},
 	title: {
 		color: "#e8e8e8",
@@ -161,14 +139,14 @@ const styles = StyleSheet.create({
 		lineHeight: 20,
 		padding: 0,
 		margin:0,
-		marginBottom: 20,
-		marginTop: 5,
+		marginBottom: 30,
+		marginTop: 25,
 		fontSize: 15
 	},
 	contentWrapper: {
 		flexDirection: "row",
 		alignItems: "center",
-		marginBottom: -30
+		marginBottom: -20
 	},
 	contentWrapperBody: {
 		flexDirection: "row",
@@ -189,7 +167,7 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		padding: 10,
 		borderRadius: 10,
-		width: 117
+		width: 132
 	},
 	buttonText: {
 		color: "#efefef"

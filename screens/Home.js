@@ -1,11 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { LinearGradient } from "expo";
+import {Header, Right, Icon} from "native-base";
 
 export default class Home extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
+				<Header style={styles.header}>
+					<Right>
+						<Icon name="menu" style={{marginRight:20}}
+						onPress={()=>this.props.navigation.openDrawer()}/>
+					</Right>
+				</Header>
 				<View style={styles.shadow}>
 					<LinearGradient
 						style={styles.cardHome}
@@ -51,6 +58,11 @@ export default class Home extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	header:{
+		width: Dimensions.get('window').width,
+		marginTop: -80,
+		height: 80
+	},
 	container: {
 		flex: 1,
 		padding: 15,

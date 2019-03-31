@@ -1,43 +1,48 @@
-import { createAppContainer } from "react-navigation";
-import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
-
 import Home from "./screens/Home";
 import MatchPredictor from "./screens/MatchPredictor";
 import StatsDisplayer from "./screens/StatsDisplayer";
-import tabBarIcon from "./utils/tabBarIcon";
+import TeamInfo from "./screens/TeamInfo";
+import React from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import {createDrawerNavigator, SafeAreaView, DrawerItems, createAppContainer} from "react-navigation"
+import { ScrollView } from 'react-native-gesture-handler';
+import {Icon} from "native-base"
 
-export default createAppContainer(
-	createMaterialBottomTabNavigator(
-		{
-			Home: {
-				screen: Home,
-				navigationOptions: {
-					tabBarLabel: "Home",
-					tabBarIcon: tabBarIcon("home")
-				}
-			},
-			MatchPredictor: {
-				screen: MatchPredictor,
-				navigationOptions: {
-					tabBarLabel: "Match Predictor",
-					tabBarIcon: tabBarIcon("device-hub")
-				}
-			},
-			StatsDisplayer: {
-				screen: StatsDisplayer,
-				navigationOptions: {
-					tabBarLabel: "Statistics",
-					tabBarIcon: tabBarIcon("insert-chart")
-				}
-			}
-		},
-		{
-			initialRouteName: "Home",
-			activeColor: "#0d0123",
-			inactiveColor: "#595959",
-			order: ["Home", "MatchPredictor", "StatsDisplayer"],
-			shifting: true,
-			barStyle: { backgroundColor: "#f3f3f3" }
-		}
-	)
-);
+const CustomDrawerComponent = (props) =>(
+  <SafeAreaView style={{flex:1}}>
+    <Icon name="close" style={[{fontSize:50, color:"#474747", }, styles.exit]}
+      onPress={()=>props.navigation.closeDrawer()}/>
+		<View style={{alignItems:"center", justifyContent:"center", height:100}}>
+			<Image source={require("./assets/logo.png")} style={{width:100, height:100, marginTop:-20, marginBottom:30}}/>
+		</View>
+    <ScrollView>
+      <DrawerItems {...props}/>
+    </ScrollView>
+  </SafeAreaView>
+)
+
+const styles = StyleSheet.create({
+  exit:{
+    marginLeft: 30
+  }
+});
+
+const AppDrawerNavigator = createDrawerNavigator(
+  {
+    Home:Home,
+		Predictor:MatchPredictor,
+    Statistics:StatsDisplayer,
+    Team_Search:TeamInfo
+  },
+  {
+		contentComponent:CustomDrawerComponent,
+    drawerPosition: 'right',
+    contentOptions:{
+      activeTintColor:"orange"
+    }
+  }
+)
+
+
+
+export default createAppContainer(AppDrawerNavigator);

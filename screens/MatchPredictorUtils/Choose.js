@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Text, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
+import { StyleSheet, TextInput, View, Text, TouchableOpacity, KeyboardAvoidingView, Platform, Dimensions } from "react-native";
 const axios = require("axios");
+import {Header, Right, Icon} from "native-base"
 
 export default class Choose extends React.Component {
 	constructor(props) {
@@ -40,6 +41,12 @@ export default class Choose extends React.Component {
 	render() {
 		return (
 			<KeyboardAvoidingView style={styles.container} behavior="padding" enabled keyboardVerticalOffset={0}>
+				<Header style={styles.header}>
+					<Right>
+						<Icon name="menu" style={{marginRight:20}}
+						onPress={()=>this.props.navigation.openDrawer()}/>
+					</Right>
+				</Header>
 				{/*Blue Alliance*/}
 				<View style={styles.blueView}></View>
 				<View style={styles.shiftBlue}>
@@ -80,6 +87,11 @@ export default class Choose extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	header:{
+		width: Dimensions.get('window').width,
+		marginTop: -115,
+		height: 80
+	},
 	container: {
 		flex: 1,
 		padding: 15,
