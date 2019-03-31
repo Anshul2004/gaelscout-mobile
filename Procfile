@@ -1,1 +1,0 @@
-worker: expo start

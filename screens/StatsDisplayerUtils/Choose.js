@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		color: "#e8e8e8",
-		fontSize: 25,
+		fontSize: 20,
 		padding: 20
 	},
 	cardStats: {

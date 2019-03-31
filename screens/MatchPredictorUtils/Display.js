@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Animated } from "react-native";
+import { StyleSheet, View, Text, Animated, Platform } from "react-native";
 
 export default class Display extends React.Component {
 	state = {
@@ -14,8 +14,8 @@ export default class Display extends React.Component {
 		const rating3 = navigation.getParam('blue1Rating', "nodata");
 		const rating4 = navigation.getParam('blue2Rating', "nodata");
 
-		const val = (200-(getOutput([rating1, rating2, rating3, rating4])*200))+100;
-		const val2 = ((getOutput([rating1, rating2, rating3, rating4])*200))+100;
+		const val = (125-(getOutput([rating1, rating2, rating3, rating4])*100))+100;
+		const val2 = ((getOutput([rating1, rating2, rating3, rating4])*100))+100;
 
 		Animated.parallel([
 			Animated.timing(
@@ -78,9 +78,18 @@ const styles = StyleSheet.create({
 	title: {
 		color: "#474747",
 		textAlign: "center",
-		fontSize: 30,
 		fontWeight: "300",
-		marginTop: 30
+		...Platform.select({
+			ios: {
+				marginTop: 40,
+				fontSize: 30,
+			},
+			android: {
+				marginTop: 10,
+				fontSize: 25,
+			},
+		  }),
+		
 	},
 	subtitle: {
 		color: "#474747",
@@ -94,7 +103,14 @@ const styles = StyleSheet.create({
 		width: 300,
 		backgroundColor: "#42b3f4",
 		borderRadius: 20,
-		marginTop: 20,
+		...Platform.select({
+			ios: {
+				marginTop: 40,
+			},
+			android: {
+				marginTop: 10,
+			},
+		  }),
 	},
 	redView: {
 		width: 300,
@@ -103,7 +119,7 @@ const styles = StyleSheet.create({
 	},
 	text:{
 		color: "#efefef",
-		fontSize: 40,
+		fontSize: 30,
 		marginTop: 10,
 		fontWeight: "200",
 		marginLeft: 20,
@@ -114,7 +130,7 @@ const styles = StyleSheet.create({
 	},
 	textPercent:{
 		color: "#efefef",
-		fontSize: 40,
+		fontSize: 30,
 		fontWeight: "300",
 		marginLeft: 180,
 		marginTop:-20,

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "gaelscout-mobile",
+    "name": "Gaelscout",
     "slug": "gaelscout-mobile",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -8,8 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "version": "1.0.1",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -24,11 +23,15 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cyber.gaelscout"
+      "bundleIdentifier": "com.cyber.gaelscout",
+      "buildNumber": "1"
     },
     "android": {
-      "package": "com.cyber.gaelscout"
+      "package": "com.cyber.gaelscout",
+      "versionCode": 3,
+      "permissions":[]
     },
-    "description": "Gaelscout Mobile is an app created by Dublin High School students. This app allows users to view useful statistics of any team in the world through the use of beautiful charts. It also comes with a match predictor that can predict the output of a given match with the teams put in as input data."
+    "orientation": "portrait",
+    "description": "Gaelscout Mobile is an app created by Dublin High School students. This app allows users to view useful statistics for any team in the world through the use of beautiful charts. It also comes with a match predictor that can predict the output of a given match with the teams placed in as input data."
   }
 }

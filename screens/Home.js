@@ -60,16 +60,16 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		color: "#e8e8e8",
-		fontSize: 30,
+		fontSize: 27,
 		padding: 20
 	},
 	cardHome: {
 		padding: 30,
 		borderRadius: 15,
 		justifyContent: "center",
-		margin: 10,
-		marginTop: 70,
-		marginBottom: 90
+		width: 335,
+		height: 500,
+		marginTop: 15
 	},
 	shadow: {
 		shadowOffset: { width: 3, height: 3 },
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
 	},
 	cardHomeBodyText: {
 		color: "#e8e8e8",
-		fontSize: 15,
+		fontSize: 14,
 		lineHeight: 20,
 		padding: 0,
 		margin:0,
