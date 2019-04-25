@@ -1,7 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import {LineChart, BarChart} from 'react-native-chart-kit';
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+
+const parentHeight = 667;
+const parentWidth =  375;
 
 export default class Display extends React.Component {
 	render() {
@@ -13,7 +15,7 @@ export default class Display extends React.Component {
 		const country = navigation.getParam('country', "nodata");
 		const city = navigation.getParam('city', "nodata");
 		const level = navigation.getParam('level', "nodata");
-
+		
 		return (
 			<ScrollView style={{flex: 1, backgroundColor: "#efefef"}} contentContainerStyle={styles.container}>
 				<Text style={styles.title}>Results for team {name}</Text>
@@ -23,7 +25,7 @@ export default class Display extends React.Component {
 				<Text style={styles.text}>Region: {region}</Text>
 				<Text style={styles.text}>City: {city}</Text>
 				<Text style={styles.text}>Grade level: {level}</Text>
-			</ScrollView>
+			</ScrollView> // returns as a tuple?
 		);
 	}
 }
@@ -36,15 +38,19 @@ const styles = StyleSheet.create({
 	title: {
 		color: "#474747",
 		textAlign: "center",
-		fontSize: 30,
+		fontSize: scale(30, parentHeight, Dimensions.get('window').height),
 		fontWeight: "300",
-		marginTop: 30
+		marginTop: scale(30, parentHeight, Dimensions.get('window').height)
 	},
 	text: {
 		color: "#474747",
 		textAlign: "center",
-		fontSize: 20,
+		fontSize: scale(20, parentHeight, Dimensions.get('window').height),
 		fontWeight: "700",
-		marginTop: 50
+		marginTop: scale(50, parentHeight, Dimensions.get('window').height)
 	},
 });
+
+function scale(val, parent, relative){
+	return val * (relative/parent);
+}

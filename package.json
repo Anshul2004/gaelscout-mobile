@@ -11,10 +11,12 @@
     "brain.js": "^1.6.1",
     "expo": "^32.0.0",
     "native-base": "^2.12.1",
+    "node-fetch": "^2.3.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-native-chart-kit": "^2.4.0",
+    "react-native-elements": "^1.1.0",
     "react-native-paper": "^2.15.0",
+    "react-native-svg-charts": "^5.2.0",
     "react-navigation": "^3.5.1",
     "react-navigation-material-bottom-tabs": "^1.0.0"
   },

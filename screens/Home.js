@@ -3,13 +3,16 @@ import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { LinearGradient } from "expo";
 import {Header, Right, Icon} from "native-base";
 
+const parentHeight = 667;
+const parentWidth =  375;
+
 export default class Home extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
 				<Header style={styles.header}>
 					<Right>
-						<Icon name="menu" style={{marginRight:20}}
+						<Icon name="menu" style={{marginRight:scale(20, parentWidth, Dimensions.get('window').width)}}
 						onPress={()=>this.props.navigation.openDrawer()}/>
 					</Right>
 				</Header>
@@ -22,8 +25,8 @@ export default class Home extends React.Component {
 							<Image
 								source={require("../assets/logo.png")}
 								style={{
-									width: 48,
-									height: 48
+									width: scale(48, parentWidth, Dimensions.get('window').width),
+									height: scale(48, parentHeight, Dimensions.get('window').height)
 								}}
 							/>
 							<Text style={styles.title}>GaelScout</Text>
@@ -60,27 +63,28 @@ export default class Home extends React.Component {
 const styles = StyleSheet.create({
 	header:{
 		width: Dimensions.get('window').width,
-		marginTop:-20,
-		height: 80
+		marginTop:scale(-20, parentHeight, Dimensions.get('window').height),
+		height: scale(80, parentHeight, Dimensions.get('window').height),
+		backgroundColor: "white"
 	},
 	container: {
-		padding: 15,
+		padding: scale(15, parentWidth, Dimensions.get('window').width),
 		backgroundColor: "#efefef",
 		alignItems: "center",
 		height: Dimensions.get('window').height
 	},
 	title: {
 		color: "#e8e8e8",
-		fontSize: 27,
-		padding: 20
+		fontSize: scale(25, parentWidth, Dimensions.get('window').width),
+		padding: scale(20, parentWidth, Dimensions.get('window').width)
 	},
 	cardHome: {
-		padding: 30,
+		padding: scale(30, parentWidth, Dimensions.get('window').width),
 		borderRadius: 15,
 		justifyContent: "center",
-		width: 335,
-		height: 500,
-		marginTop: 30
+		width: scale(335, parentWidth, Dimensions.get('window').width),
+		height: scale(520, parentHeight, Dimensions.get('window').height),
+		marginTop: scale(30, parentHeight, Dimensions.get('window').height)
 	},
 	shadow: {
 		shadowOffset: { width: 3, height: 3 },
@@ -89,35 +93,39 @@ const styles = StyleSheet.create({
 	},
 	cardHomeTitle: {
 		color: "#e8e8e8",
-		fontSize: 25,
+		fontSize: scale(20, parentHeight, Dimensions.get('window').height),
 		fontWeight: '700'
 	},
 	cardHomeSubTitle: {
 		color: "#e8e8e8",
-		fontSize: 17,
+		fontSize: scale(15, parentHeight, Dimensions.get('window').height),
 		padding: 0,
 		marginTop: 0,
-		marginBottom: 10,
+		marginBottom: scale(10, parentHeight, Dimensions.get('window').height),
 		fontWeight: "700"
 	},
 	cardHomeBody: {
 		color: "#e8e8e8",
-		fontSize: 12,
+		fontSize: scale(15, parentHeight, Dimensions.get('window').height),
 		flexDirection: "row",
 		flex: 1,
 		padding: 0,
-		margin: 10
+		margin: scale(10, parentHeight, Dimensions.get('window').height)
 	},
 	cardHomeBodyText: {
 		color: "#e8e8e8",
-		fontSize: 14,
-		lineHeight: 20,
+		fontSize: scale(15, parentHeight, Dimensions.get('window').height),
+		lineHeight: scale(20, parentHeight, Dimensions.get('window').height),
 		padding: 0,
 		margin:0,
-		marginBottom: 15
+		marginBottom: scale(15, parentHeight, Dimensions.get('window').height)
 	},
 	titleWrapper: {
 		flexDirection: "row",
 		alignItems: "center"
 	}
 });
+
+function scale(val, parent, relative){
+	return val * (relative/parent);
+}

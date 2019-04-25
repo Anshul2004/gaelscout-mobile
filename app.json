@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.1",
+    "version": "1.4.1",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -24,11 +24,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.cyber.gaelscout",
-      "buildNumber": "2"
+      "buildNumber": "1"
     },
     "android": {
       "package": "com.cyber.gaelscout",
-      "versionCode": 3,
+      "versionCode": 8,
       "permissions":[]
     },
     "orientation": "portrait",

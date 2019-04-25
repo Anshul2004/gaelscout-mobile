@@ -1,18 +1,38 @@
 import React from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View, Text, Image, Dimensions } from "react-native";
+import { StyleSheet, TextInput, TouchableOpacity, View, Text, Image, Dimensions, Alert, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { LinearGradient } from "expo";
 const axios = require("axios");
-import {Header, Right, Icon} from "native-base"
+import {Header, Right, Icon} from "native-base";
 
 var data = [];
+
+const parentHeight = 667;
+const parentWidth =  375;
+
+const DismissKeyboard = ({ children }) => (
+	<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+	  {children}
+	</TouchableWithoutFeedback>
+  );
 
 export default class Choose extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			input:""
+        };
 	}
 
 	computeOutput = async DATASET => 
 	{
+		if(this.state.input == ""){
+			Alert.alert("A team has not been inputted", "Please input a team");
+		}
+		else if(this.state.input.toLowerCase() == "5327s"){
+			console.log("5327s");
+			this.props.navigation.navigate('CCWM', {ccwm: [4.42806,7.07174,14.7051,3.35713,-3.40498], sku: ["VRC-5","VRC-4","VRC-3","VRC-2","VRC-1"], max_score: [32,29,34,25,25], rank: [0, 6, 9, 4, -15], name:"5327S"});
+		}
+		else{
 		let dat_a = await axios(
 			`https://api.vexdb.io/v1/get_rankings?season=Turning%20Point&team=${this.state.input}`
 		);
@@ -23,6 +43,8 @@ export default class Choose extends React.Component {
 		let name = this.state.input;
 
 		var lowestRank = 0;
+
+		if(dat_a.data.result.length > 0){
 
 		for(i = 0; i < dat_a.data.result.length; i++){
 			if(i == 5){
@@ -42,18 +64,27 @@ export default class Choose extends React.Component {
 			}
 			rank.push(lowestRank-dat_a.data.result[4-i]["rank"]);
 		}
-
-		this.props.navigation.navigate('Display', {ccwm: ccwm, sku: tournaments, max_score: max_score, rank: rank, name:name});
+		this.props.navigation.navigate('CCWM', {ccwm: ccwm, sku: tournaments, max_score: max_score, rank: rank, name:name});
+		
+		}
+		else{
+			Alert.alert(this.state.input + " is not a valid team", "Please choose a valid team to search");
+		} 
+	}
 	}
 
 
 	render() {
 		return (
+			<DismissKeyboard>
 			<View style={styles.container}>
 				<Header style={styles.header}>
 					<Right>
-						<Icon name="menu" style={{marginRight:20}}
-						onPress={()=>this.props.navigation.openDrawer()}/>
+						<Icon name="menu" style={{marginRight:scale(20, parentWidth, Dimensions.get('window').width)}}
+						onPress={()=>{
+							this.props.navigation.openDrawer();
+							Keyboard.dismiss();
+							}}/>
 					</Right>
 				</Header>
 				<View style={styles.shadow}>
@@ -65,8 +96,8 @@ export default class Choose extends React.Component {
 							<Image
 								source={require("../../assets/logo.png")}
 								style={{
-									width: 48,
-									height: 48
+									width: scale(48, parentWidth, Dimensions.get('window').width),
+									height: scale(48, parentHeight, Dimensions.get('window').height)
 								}}
 							/>
 							<Text style={styles.title}>GaelScout Statistics</Text>
@@ -87,6 +118,7 @@ export default class Choose extends React.Component {
 					</LinearGradient>
 				</View>
 			</View>
+			</DismissKeyboard>
         )
 	};
 }
@@ -94,37 +126,38 @@ export default class Choose extends React.Component {
 const styles = StyleSheet.create({
 	header:{
 		width: Dimensions.get('window').width,
-		height: 80,
-		marginTop:-5,
+		height: scale(80, parentHeight, Dimensions.get('window').height),
+		marginTop:scale(-5, parentHeight, Dimensions.get('window').height),
+    	backgroundColor: "white"
 	},
 	container: {
 		backgroundColor: "#efefef",
 		alignItems: "center",
-		height:Dimensions.get('window').height
+		height: Dimensions.get('window').height
 	},
 	input: {
 		backgroundColor: "#efefef",
 		borderColor: "#cecece",
 		borderWidth: 2,
 		borderRadius: 10,
-		padding: 10,
+		padding: scale(10, parentHeight, Dimensions.get('window').height),
 		color: "#4c4c4c",
-		width: 130,
-		marginTop: 30
+		width: scale(130, parentWidth, Dimensions.get('window').width),
+		marginTop: scale(65, parentHeight, Dimensions.get('window').height)
 	},
 	title: {
 		color: "#e8e8e8",
-		fontSize: 20,
-		padding: 20
+		fontSize: scale(20, parentHeight, Dimensions.get('window').height),
+		padding: scale(20, parentHeight, Dimensions.get('window').height)
 	},
 	cardStats: {
-		padding: 30,
+		padding: scale(30, parentHeight, Dimensions.get('window').height),
 		borderRadius: 15,
 		justifyContent: "center",
-		margin: 10,
-		marginTop: 70,
-		marginBottom: 90,
-		width: 330
+		margin: scale(10, parentHeight, Dimensions.get('window').height),
+		marginTop: scale(70, parentHeight, Dimensions.get('window').height),
+		marginBottom: scale(90, parentHeight, Dimensions.get('window').height),
+		width: scale(330, parentWidth, Dimensions.get('window').width),
 	},
 	shadow: {
 		shadowOffset: { width: 3, height: 3 },
@@ -133,41 +166,41 @@ const styles = StyleSheet.create({
 	},
 	cardStatsTitle: {
 		color: "#e8e8e8",
-		fontSize: 25,
+		fontSize: scale(25, parentHeight, Dimensions.get('window').height),
 		fontWeight: '700'
 	},
 	cardStatsSubTitle: {
 		color: "#e8e8e8",
-		fontSize: 17,
+		fontSize: scale(17, parentHeight, Dimensions.get('window').height),
 		padding: 0,
 		marginTop: 0,
-		marginBottom: 10,
+		marginBottom: scale(10, parentHeight, Dimensions.get('window').height),
 		fontWeight: "700"
 	},
 	cardStatsBodyTextRight: {
 		color: "#e8e8e8",
-		fontSize: 15,
-		lineHeight: 20,
+		fontSize: scale(15, parentHeight, Dimensions.get('window').height),
+		lineHeight: scale(20, parentHeight, Dimensions.get('window').height),
 		padding: 0,
 		margin:0,
-		marginBottom: 15,
-		marginLeft: 20,
-		marginTop: 40,
-		width: 140
+		marginBottom: scale(15, parentHeight, Dimensions.get('window').height),
+		marginLeft: scale(20, parentWidth, Dimensions.get('window').width),
+		marginTop: scale(40, parentHeight, Dimensions.get('window').height),
+		width: scale(140, parentWidth, Dimensions.get('window').width)
 	},
 	cardStatsBodyText: {
 		color: "#e8e8e8",
-		lineHeight: 20,
+		lineHeight: scale(20, parentHeight, Dimensions.get('window').height),
 		padding: 0,
 		margin:0,
-		marginBottom: 20,
-		marginTop: 5,
-		fontSize: 15
+		marginBottom: scale(30, parentHeight, Dimensions.get('window').height),
+		marginTop: scale(10, parentHeight, Dimensions.get('window').height),
+		fontSize: scale(15, parentHeight, Dimensions.get('window').height)
 	},
 	contentWrapper: {
 		flexDirection: "row",
 		alignItems: "center",
-		marginBottom: -30
+		marginBottom: scale(-20, parentHeight, Dimensions.get('window').height)
 	},
 	contentWrapperBody: {
 		flexDirection: "row",
@@ -178,19 +211,23 @@ const styles = StyleSheet.create({
 		borderColor: "#cecece",
 		borderWidth: 2,
 		borderRadius: 10,
-		padding: 10,
+		padding: scale(10, parentHeight, Dimensions.get('window').height),
 		color: "#4c4c4c",
-		width: 130,
-		marginTop: 30
+		width: scale(130, parentWidth, Dimensions.get('window').width),
+		marginTop: scale(30, parentHeight, Dimensions.get('window').height)
 	},
 	button: {
 		borderColor: "#efefef",
 		borderWidth: 2,
-		padding: 10,
+		padding: scale(10, parentHeight, Dimensions.get('window').height),
 		borderRadius: 10,
-		width: 117
+		width: scale(132, parentWidth, Dimensions.get('window').width)
 	},
 	buttonText: {
 		color: "#efefef"
 	}
 });
+
+function scale(val, parent, relative){
+	return val * (relative/parent);
+}

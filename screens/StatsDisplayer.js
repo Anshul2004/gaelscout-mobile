@@ -1,7 +1,9 @@
 
 import {createStackNavigator} from 'react-navigation';
 import Choose from './StatsDisplayerUtils/Choose';
-import Display from './StatsDisplayerUtils/Display';
+import CCWM from './StatsDisplayerUtils/StatsPages/CCWM';
+import MaxScore from './StatsDisplayerUtils/StatsPages/MaxScore';
+import Rank from './StatsDisplayerUtils/StatsPages/Rank';
 
 export default createStackNavigator({
 	Choose: { screen: Choose,
@@ -9,5 +11,19 @@ export default createStackNavigator({
 			header: null
 		})
 	},
-	Display: { screen: Display }
+	CCWM: { screen: CCWM,
+		navigationOptions: ({ navigation }) => ({
+			header: null
+		})
+	},
+	MaxScore: { screen: MaxScore,
+		navigationOptions: ({ navigation }) => ({
+			header: null
+		})
+	},
+	Rank: { screen: Rank,
+		navigationOptions: ({ navigation }) => ({
+			header: null
+		})
+	},
 });
